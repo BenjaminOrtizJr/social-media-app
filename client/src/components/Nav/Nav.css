@@ -1,0 +1,43 @@
+@media screen and (max-width: 768px) {
+    
+    .nav__bar-container {
+        border-bottom: .1px solid #1DA1F2;
+    }
+    .topnav {
+        overflow: hidden;
+        background-color: #15202B;
+        position: relative;
+        height: 50px;
+    }
+
+    .logo-home {
+        position: absolute;
+        width: 160px;
+        top: 6px;
+        left: 4px;
+    }
+
+    .nav__bar-links {
+        float: right;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #15202B;
+        position: relative;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        right: 10px;
+    }
+
+    .links {
+        color: whitesmoke;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+
+    .links:hover {
+        color: #1DA1F2;
+    }
+}

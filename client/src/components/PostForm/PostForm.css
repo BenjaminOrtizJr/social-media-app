@@ -1,0 +1,12 @@
+.post-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+input {
+    color: white;
+}
+
+.post-button {
+    color: white;
+}
