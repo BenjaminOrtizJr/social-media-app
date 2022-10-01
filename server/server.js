@@ -24,10 +24,11 @@ app.get('/read', async (req, res) => {
 })
 
 app.post('/insert', async (req, res) => {
-    const PostImage = req.body.postImage
-    const PostContent = req.body.postContent
+    const postTitle = req.body.postTitle
+    const postImage = req.body.postImage
+    const postContent = req.body.postContent
     
-    const post = new PostModel({ postImage: postImage, postContent: postContent });
+    const post = new PostModel({ postTitle: postTitle, postImage: postImage, postContent: postContent });
     
     try {
         await post.save()

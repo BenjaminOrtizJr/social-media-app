@@ -1,4 +1,4 @@
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     
     .footer {
         position: fixed;
@@ -31,4 +31,4 @@
         margin-left: 10px;
     }
 
-} */
+}

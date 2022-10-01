@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const PostSchema = new mongoose.Schema({
-    postImage: {
+    postTitle: {
         type: String,
         required: true
     },
-    postTitle: {
+    postImage: {
         type: String,
         required: true
     },
