@@ -11,7 +11,7 @@ const Nav = () => {
         <Link to="#" className="active"><img className="logo-home" src={require('../images/logo.png')} alt="logo"/></Link>
       <div className="myLinks">
         <ul className="nav__bar-links">
-            <li><Link className="links" to="profile"><AccountCircleIcon style={{ fontSize: 28, color: "#DCF8FF"}} /></Link></li>
+            <li><Link className="links" to="profile"><AccountCircleIcon style={{ fontSize: 44, color: "#DCF8FF"}} /></Link></li>
         </ul>
       </div>
       </div>

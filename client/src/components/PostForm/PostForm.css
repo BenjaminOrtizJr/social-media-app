@@ -1,12 +1,62 @@
-.post-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-}
-input {
-    color: white;
-}
+@media screen and (max-width: 768px) {
 
-.post-button {
-    color: white;
+    .post-form-wrapper {
+        background-color: #15202B;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .post-form {
+        max-width: 768px;
+        
+    }
+
+    .title-input {
+        color: white;
+        height: 40px;
+        width: 100%;
+    }
+
+    .image-input {
+        color: white;
+        height: 40px;
+        width: 100%;
+    }
+
+    .description-input {
+        color: white;
+        height: 180px;
+        width: 100%;
+    }
+
+    .post-button {
+        color: white;
+    }
+
+    .cancel-button {
+        color: white;
+    }
+
+    .add-icon {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: none;
+        opacity: 0.8;
+    }
+
+    .post-button-container {
+        float: right;
+        position: relative;
+        top: 5px;
+        right: 8px;
+    }
+
+    .post-button-container > button {
+        
+        padding: 6px;
+    }
 }

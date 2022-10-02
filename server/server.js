@@ -5,6 +5,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 const PostModel = require('./models/posts')
+const CommentModel = require('./models/comments')
 
 app.use(express.json())
 app.use(cors())
@@ -14,6 +15,7 @@ mongoose.connect('mongodb+srv://bortizjr84:Silent84@social-db.ocgpivo.mongodb.ne
     useNewUrlParser: true,
 })
 
+// Posts GET Request
 app.get('/read', async (req, res) => {
     PostModel.find({}, (err, result) => {
         if (err) {
@@ -23,6 +25,17 @@ app.get('/read', async (req, res) => {
     })
 })
 
+// Comments GET Request
+app.get('/readComments', async (req, res) => { 
+    CommentModel.find({}, (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+        res.send(result)
+    })
+})
+
+// Posts POST Request
 app.post('/insert', async (req, res) => {
     const postTitle = req.body.postTitle
     const postImage = req.body.postImage
@@ -32,6 +45,20 @@ app.post('/insert', async (req, res) => {
     
     try {
         await post.save()
+        res.send("inserted data")
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+// Comments POST Request
+app.post('/insertComment', async (req, res) => { 
+    const postComment = req.body.comment
+    
+    const comment = new CommentModel({ comment: postComment });
+
+    try {
+        await comment.save()
         res.send("inserted data")
     } catch (err) {
         console.log(err)
