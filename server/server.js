@@ -5,7 +5,6 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 const PostModel = require('./models/posts')
-const CommentModel = require('./models/comments')
 
 app.use(express.json())
 app.use(cors())
@@ -25,23 +24,14 @@ app.get('/read', async (req, res) => {
     })
 })
 
-// Comments GET Request
-app.get('/readComments', async (req, res) => { 
-    CommentModel.find({}, (err, result) => {
-        if (err) {
-            res.send(err)
-        }
-        res.send(result)
-    })
-})
-
 // Posts POST Request
 app.post('/insert', async (req, res) => {
     const postTitle = req.body.postTitle
     const postImage = req.body.postImage
     const postContent = req.body.postContent
+    const postComment = req.body.postComment
     
-    const post = new PostModel({ postTitle: postTitle, postImage: postImage, postContent: postContent });
+    const post = new PostModel({ postTitle: postTitle, postImage: postImage, postContent: postContent, postComment: postComment });
     
     try {
         await post.save()
@@ -51,19 +41,6 @@ app.post('/insert', async (req, res) => {
     }
 })
 
-// Comments POST Request
-app.post('/insertComment', async (req, res) => { 
-    const postComment = req.body.comment
-    
-    const comment = new CommentModel({ comment: postComment });
-
-    try {
-        await comment.save()
-        res.send("inserted data")
-    } catch (err) {
-        console.log(err)
-    }
-})
 
 app.put('/update', async (req, res) => {
     const editPost = req.body.editPost

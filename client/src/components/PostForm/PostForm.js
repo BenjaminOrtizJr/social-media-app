@@ -5,17 +5,19 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 const PostForm = (props) => {
 
-  const initInputs = { postTitle: props.postTitle || "", postImage: props.postImage || "", postContent: props.postContent || "" }
+  const initInputs = { postTitle: props.postTitle || "", postImage: props.postImage || "", postContent: props.postContent || "", postComment: props.postComment || "" }
+
   const [inputs, setInputs] = useState(initInputs)
 
   const [postTitle, setPostTitle] = useState("")
   const [postImage, setPostImage] = useState("")
   const [postContent, setPostContent] = useState("")
+  const [postComment, setPostComment] = useState("")
 
   const [editToggle, setEditToggle] = useState(false)
                                      
   const addToList = () => {
-    Axios.post('http://localhost:3001/insert', { postTitle: postTitle, postImage: postImage, postContent: postContent })
+    Axios.post('http://localhost:3001/insert', { postTitle: postTitle, postImage: postImage, postContent: postContent, postComment: postComment })
   }
 
   const handleSubmit = () => {
@@ -33,21 +35,23 @@ const PostForm = (props) => {
         <>
           <div className="post-form-wrapper">
             <form className="post-form" onSubmit={handleSubmit}>
-              <input
+              <textarea
                 className="title-input"
-                type="text"
+                rows="3"
                 placeholder="Title:"
                 onChange={(event) => { setPostTitle(event.target.value) }} />
-              <input
+              <textarea
                 className="image-input"
-                type="text"
+                rows="3"
                 placeholder="Image URL:"
                 onChange={(event) => { setPostImage(event.target.value) }} />
-              <input
+              <textarea
+                rows="30"
                 className="description-input"
                 type="text"
                 placeholder="Description:"
-                onChange={(event) => { setPostContent(event.target.value) }} />
+                onChange={(event) => { setPostContent(event.target.value) }} /> 
+              <input className="comment-input" onChange={(event) => { setPostComment(event.target.value) }} />
               <div className="post-button-container">
                 <button className="post-button" onClick={addToList}>Post</button>
                 <button className="cancel-button" onClick={() => setEditToggle(prevToggle => !prevToggle)}>Cancel</button>

@@ -6,6 +6,7 @@
         display: flex;
         flex-direction: column;
         align-items: left;
+        
     }
 
     .post-container {
@@ -63,8 +64,25 @@
         padding: 0 8px 0 8px;
     }
 
+    .comment-input {
+        width: 100%;
+        background-color: red;
+        border: 1px solid #1DA1F2;
+        outline: none;
+        /* background-color: transparent; */
+        color: white;
+        font-size: 16px;
+        
+    }
+
     .comment-icon {
         margin: 5px;
+    }
+
+    .send-icon {
+        float: right;
+        margin-right: 8px;
+        margin-top: -18px;
     }
 
     .like-icon {
