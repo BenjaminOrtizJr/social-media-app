@@ -27,6 +27,7 @@ class Auth extends Component {
             className="user-input"
             type="text"
             name="userName"
+            autoComplete="current-username"
             value={this.state.userName}
             placeholder="User Id"
             onChange={this.handleChange}
@@ -36,6 +37,7 @@ class Auth extends Component {
             className="user-input"
             type="password"
             name="password"
+            autoComplete="current-password"
             value={this.state.password}
             placeholder="Password"
             onChange={this.handleChange}

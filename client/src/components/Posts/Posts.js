@@ -4,30 +4,14 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SendIcon from '@mui/icons-material/Send';
-import Axios from 'axios'
 
 
 const Posts = (props) => {
 
-  const initInputs = { postComment: props.postComment || "" }
-  const [inputs, setInputs] = useState(initInputs)
 
   const { postTitle, postImage, postContent, id } = props
   const [editToggle, setEditToggle] = useState(false)
  
-  const [editPost, setEditPost] = useState("")
-
-  const updateComment = (id) => {
-    Axios.put("http://localhost:3001/update", {
-      id: id, editPost: editPost
-    })
-  }
-
-  const handleSubmit = () => {
-    props.submit(inputs, props.id)
-    setInputs(initInputs)
-  }
-
   return (
     <div className="post-wrapper">
       <div className="post-container">
@@ -51,14 +35,12 @@ const Posts = (props) => {
         </>
         :
         <>
-          <form className="comment-form" onSubmit={handleSubmit}>
+          <form className="comment-form">
             <div className="comments">
               {/* <CommentList /> */}
             </div>
-            <textarea className="comment-input" cols="5" placeholder="Comment" onChange={(event) => {
-              setEditPost(event.target.value)
-            }}/>
-            <span className="send-span"><SendIcon className="send-icon" style={ { color: "#1DA1F2", fontSize: 40 }} onClick={() => updateComment(id)} /></span>
+            <textarea className="comment-input" type="text" placeholder="Comment" />
+            <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }}/></span>
           </form>
         </>
       }
