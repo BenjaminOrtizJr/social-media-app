@@ -10,6 +10,7 @@ import Axios from 'axios';
 
 const Posts = (props) => {
 
+
   const secondInputs = { postComment: props.postComment || "" }
   const [inputs, setInputs] = useState(secondInputs)
 
