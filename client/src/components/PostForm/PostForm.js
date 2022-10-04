@@ -51,7 +51,7 @@ const PostForm = (props) => {
                 type="text"
                 placeholder="Description:"
                 onChange={(event) => { setPostContent(event.target.value) }} /> 
-              <input className="comments-input1" onChange={(event) => { setPostComment(event.target.value) }} />
+              <input className="comments-input1" value="test-comment" onChange={(event) => { setPostComment(event.target.value) }} />
               <div className="post-button-container">
                 <button className="post-button" onClick={addToList}>Post</button>
                 <button className="cancel-button" onClick={() => setEditToggle(prevToggle => !prevToggle)}>Cancel</button>

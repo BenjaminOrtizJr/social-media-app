@@ -2,10 +2,11 @@ import React from 'react'
 import './Comments.css'
 
 const Comments = (props) => {
-    
+  const { postComment } = props
+
   return (
       <div className="comment-container">
-          <p className="comment-content">{ }</p>
+          <p className="comment-content">{postComment}</p>
       </div>
   )
 }
