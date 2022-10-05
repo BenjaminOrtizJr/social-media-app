@@ -4,31 +4,11 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SendIcon from '@mui/icons-material/Send';
-import Axios from 'axios';
-
-
 
 const Posts = (props) => {
 
-
-  const secondInputs = { postComment: props.postComment || "" }
-  const [inputs, setInputs] = useState(secondInputs)
-
   const { postTitle, postImage, postContent, postComment } = props
   const [editToggle, setEditToggle] = useState(false)
-
-  const [editPost, setEditPost] = useState('')
-
-  const updateComment = (id) => {
-    Axios.put("http://localhost:3001/update", {
-      id: id, editPost: editPost
-    })
-  }
-
-  const handleSubmit = () => {
-    props.submit(inputs, props.id)
-    setInputs(secondInputs)
-  }
  
   return (
     <div className="post-wrapper">
@@ -43,7 +23,6 @@ const Posts = (props) => {
         <h3 className="post-title">{postTitle}</h3>
         <img className="post-image" src={postImage} alt="post" />
         <p className="post-content">{postContent}</p>
-        <p className="post-comment">{postComment}</p>
       </div>
       {!editToggle ?
         <>
@@ -54,11 +33,10 @@ const Posts = (props) => {
         </>
         :
         <>
-          <form className="comment-form" onSubmit={handleSubmit}>
-              <textarea className="comment-input" type="text" placeholder="Comment" onChange={(event) => {
-                setEditPost(event.target.value)
-              }} />
-              <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }} onClick={() => updateComment()} /></span>
+          <p className="post-comment">{postComment}</p>
+          <form className="comment-form" >
+              <textarea className="comment-input" type="text" placeholder="Comment" />
+              <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }} /></span>
             </form>
         </>
       }

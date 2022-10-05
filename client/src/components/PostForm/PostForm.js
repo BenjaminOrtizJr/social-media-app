@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './PostForm.css'
-import Axios from 'axios'
+// import Axios from 'axios'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 const PostForm = (props) => {
@@ -9,19 +9,23 @@ const PostForm = (props) => {
 
   const [inputs, setInputs] = useState(initInputs)
 
-  const [postTitle, setPostTitle] = useState("")
-  const [postImage, setPostImage] = useState("")
-  const [postContent, setPostContent] = useState("")
-  const [postComment, setPostComment] = useState("")
+  // const [postTitle, setPostTitle] = useState("")
+  // const [postImage, setPostImage] = useState("")
+  // const [postContent, setPostContent] = useState("")
+  // const [postComment, setPostComment] = useState("")
 
   const [editToggle, setEditToggle] = useState(false)
                                      
-  const addToList = () => {
-    Axios.post('http://localhost:3001/insert', { postTitle: postTitle, postImage: postImage, postContent: postContent, postComment: postComment })
-  }
+  // const addToList = () => {
+  //   Axios.post('http://localhost:3001/insert', { postTitle: postTitle, postImage: postImage, postContent: postContent, postComment: postComment })
+  // }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setInputs(prevInputs => ({ ...prevInputs, [name]: value }))
+  }
   const handleSubmit = () => {
-      props.submit(inputs, props.id)
+      props.submit(inputs, props._id)
       setInputs(initInputs)
   }
 
@@ -39,21 +43,21 @@ const PostForm = (props) => {
                 className="title-input"
                 rows="3"
                 placeholder="Title:"
-                onChange={(event) => { setPostTitle(event.target.value) }} />
+                onChange={handleChange} />
               <textarea
                 className="image-input"
                 rows="3"
                 placeholder="Image URL:"
-                onChange={(event) => { setPostImage(event.target.value) }} />
+                onChange={handleChange} />
               <textarea
                 rows="30"
                 className="description-input"
                 type="text"
                 placeholder="Description:"
-                onChange={(event) => { setPostContent(event.target.value) }} /> 
-              <input className="comments-input1" value="test-comment" onChange={(event) => { setPostComment(event.target.value) }} />
+                onChange={handleChange} /> 
+              <input className="comments-input1" type="text" onChange={handleChange} />
               <div className="post-button-container">
-                <button className="post-button" onClick={addToList}>Post</button>
+                <button className="post-button">Post</button>
                 <button className="cancel-button" onClick={() => setEditToggle(prevToggle => !prevToggle)}>Cancel</button>
               </div>
             </form>
