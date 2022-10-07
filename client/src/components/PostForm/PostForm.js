@@ -15,7 +15,7 @@ const PostForm = (props) => {
     setInputs(prevInputs => ({ ...prevInputs, [name]: value }))
   }
   const handleSubmit = () => {
-      props.submit(inputs, props.id)
+      props.submit(inputs, props._id)
       setInputs(initInputs)
   }
 

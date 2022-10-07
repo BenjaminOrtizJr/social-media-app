@@ -34,9 +34,9 @@ const Posts = (props) => {
         :
         <>
           <p className="post-comment">{postComment}</p>
-          <form className="comment-form" postComment={postComment}>
+          <form className="comment-form" >
               <textarea className="comment-input" type="text" placeholder="Comment" />
-              <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }} /></span>
+            <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }} /></span>
             </form>
         </>
       }

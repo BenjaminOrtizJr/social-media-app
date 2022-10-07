@@ -36,7 +36,7 @@ const Home = () => {
       <div>
       <Nav />
       <PostForm submit={addPost} />
-      {postList.map(post => <Posts {...post} key={post._id} editPost={editPost} />)}
+      {postList.map(post => <Posts {...post} key={post._id} submit={editPost} />)}
       
     </div>
   )
