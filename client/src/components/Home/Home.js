@@ -16,14 +16,14 @@ const Home = () => {
 
   const addPost = (newPost) => {
     Axios.post('http://localhost:3001/insert', newPost)
-      .then(res => setPostList([...postList, res.data]))  
+      .then(res => setPostList(prevPosts => [...prevPosts, res.data]))  
       .catch(err => console.log(err))
   }
 
   const editPost = (id) => {
     Axios.put('http://localhost:3001/update', { id: id, newComment: newComment })
       .then(res => {
-        setPostList(prevPosts => prevPosts.map(post => post._id !== id ? post : res.data))
+        setNewComment(prevPosts => prevPosts.map(post => post._id !== id ? post : res.data))
       })
       .catch(err => console.log(err))
   }
