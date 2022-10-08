@@ -13,7 +13,6 @@ const Home = () => {
       .then(res => setPostList(res.data))
       .catch(err => console.log(err))
   }
-
   const addPost = (newPost) => {
     Axios.post('http://localhost:3001/insert', newPost)
       .then(res => setPostList(prevPosts => [...prevPosts, res.data]))  

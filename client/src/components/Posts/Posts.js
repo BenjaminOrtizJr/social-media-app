@@ -37,7 +37,7 @@ const Posts = (props) => {
           <form className="comment-form" >
               <textarea className="comment-input" type="text" placeholder="Comment" />
             <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }} /></span>
-            </form>
+          </form>
         </>
       }
     </div>
