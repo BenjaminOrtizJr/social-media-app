@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const PostSchema = new mongoose.Schema({
     postTitle: {
@@ -14,8 +15,8 @@ const PostSchema = new mongoose.Schema({
         required: false
     },
     postComment: {
-        type: String,
-        required: false
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
     }
 });
 

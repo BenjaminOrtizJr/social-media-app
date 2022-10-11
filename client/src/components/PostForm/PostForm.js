@@ -4,7 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 const PostForm = (props) => {
 
-  const initInputs = { postTitle: props.postTitle || "", postImage: props.postImage || "", postContent: props.postContent || "", postComment: props.postComment || "" }
+  const initInputs = { postTitle: props.postTitle || "", postImage: props.postImage || "", postContent: props.postContent || "" }
 
   const [inputs, setInputs] = useState(initInputs)
 
@@ -50,11 +50,6 @@ const PostForm = (props) => {
                 value={inputs.postContent}
                 placeholder="Description:"
                 onChange={handleChange} /> 
-              <input className="comments-input1"
-                type="text"
-                name="postComment"
-                value={inputs.postComment}
-                onChange={handleChange} />
               <div className="post-button-container">
                 <button className="post-button">Post</button>
                 <button className="cancel-button" onClick={() => setEditToggle(prevToggle => !prevToggle)}>Cancel</button>

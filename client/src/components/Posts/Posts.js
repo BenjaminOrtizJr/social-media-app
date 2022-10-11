@@ -1,14 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Posts.css'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SendIcon from '@mui/icons-material/Send';
+// import SendIcon from '@mui/icons-material/Send';
+import Axios from 'axios'
 
 const Posts = (props) => {
 
-  const { postTitle, postImage, postContent, postComment } = props
+  const { postTitle, postImage, postContent } = props
   const [editToggle, setEditToggle] = useState(false)
+
+  const initInputs = { postComment: props.postComment || "" , id: props.id || "" }
+
+  const [postComment, setPostComment] = useState('')
+
+  const [inputs, setInputs] = useState(initInputs)
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/read').then((response) => {
+      setPostComment(response.data)
+    })
+  }, [])
+
+   const addComment = (id) => {
+    Axios.post('http://localhost:3001/insert/comment', { postComment: postComment, id: id })
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setInputs(prevInputs => ({ ...prevInputs, [name]: value }))
+  }
+
+  const handleSubmit = () => {
+      props.submit(inputs, props._id)
+      setInputs(initInputs)
+  }
  
   return (
     <div className="post-wrapper">
@@ -33,10 +60,21 @@ const Posts = (props) => {
         </>
         :
         <>
-          <p className="post-comment">{postComment}</p>
-          <form className="comment-form" >
-              <textarea className="comment-input" type="text" placeholder="Comment" />
-            <span className="send-span"><SendIcon className="send-icon" style={{ color: "#1DA1F2", fontSize: 44 }} /></span>
+          
+          <p className="post-comment"></p>
+
+          <form className="comment-form" onSubmit={handleSubmit}>
+            
+            <textarea
+              className="comment-input"
+              name="postComment"
+              value={inputs.postComment}
+              onChange={handleChange}
+              placeholder="Comment" />
+            
+            <span className="send-span">
+              <button className="send-icon" onClick={addComment}>Go</button>
+            </span>
           </form>
         </>
       }

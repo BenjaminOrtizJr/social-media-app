@@ -5,6 +5,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 const PostModel = require('./models/posts')
+const CommentModel = require('./models/comments')
 
 app.use(express.json())
 app.use(cors())
@@ -14,7 +15,7 @@ mongoose.connect('mongodb+srv://bortizjr84:Silent84@social-db.ocgpivo.mongodb.ne
     useNewUrlParser: true,
 })
 
-// Posts GET Request
+// GET Request
 app.get('/read', async (req, res) => {
     PostModel.find({}, (err, result) => {
         if (err) {
@@ -24,14 +25,13 @@ app.get('/read', async (req, res) => {
     })
 })
 
-// Posts POST Request
+// POST Request
 app.post('/insert', async (req, res) => {
     const postTitle = req.body.postTitle
     const postImage = req.body.postImage
     const postContent = req.body.postContent
-    const postComment = req.body.postComment
     
-    const post = new PostModel({ postTitle: postTitle, postImage: postImage, postContent: postContent, postComment: postComment });
+    const post = new PostModel({ postTitle: postTitle, postImage: postImage, postContent: postContent });
     
     try {
         await post.save()
@@ -41,7 +41,7 @@ app.post('/insert', async (req, res) => {
     }
 })
 
-
+// Update Request
 app.put('/update', async (req, res) => {
     const editPost = req.body.editPost
     const id = req.body.id
@@ -57,11 +57,38 @@ app.put('/update', async (req, res) => {
     }
 })
 
+// Delete Request
 app.delete('/delete/:id', async (req, res) => {
     const id = req.params.id
 
     await PostModel.findByIdAndRemove(id).exec()
     res.send('deleted')
+})
+
+// Get Comments by post id
+app.get('/read/:id', (req, res, next) => {
+    CommentModel.find({ id: req.params._id }, (err, comments) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(comments)
+    })
+})
+
+// Post Comment
+app.post("/insert/comment", async (req, res, next) => {
+    const id = req.params._id
+    const postComment = req.body.postComment
+    
+    const comment = new CommentModel({ id: id, postComment: postComment });
+
+    try {
+        await comment.save()
+        res.send("inserted comment")
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 app.listen(3001, () => {

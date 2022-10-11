@@ -6,7 +6,6 @@ import Axios from 'axios'
 
 const Home = () => {
   const [postList, setPostList] = useState([])
-  const [newComment, setNewComment] = useState("")
 
   const getPosts = () => {
     Axios.get('http://localhost:3001/read')
@@ -19,13 +18,6 @@ const Home = () => {
       .catch(err => console.log(err))
   }
 
-  const editPost = (id) => {
-    Axios.put('http://localhost:3001/update', { id: id, newComment: newComment })
-      .then(res => {
-        setNewComment(prevPosts => prevPosts.map(post => post._id !== id ? post : res.data))
-      })
-      .catch(err => console.log(err))
-  }
 
   useEffect(() => {
     getPosts()
@@ -35,7 +27,7 @@ const Home = () => {
       <div>
       <Nav />
       <PostForm submit={addPost} />
-      {postList.map(post => <Posts {...post} key={post._id} submit={editPost} />)}
+      {postList.map(post => <Posts {...post} key={post._id} />)}
       
     </div>
   )
