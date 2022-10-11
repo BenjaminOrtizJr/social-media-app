@@ -11,7 +11,7 @@ const Posts = (props) => {
   const { postTitle, postImage, postContent } = props
   const [editToggle, setEditToggle] = useState(false)
 
-  const initInputs = { postComment: props.postComment || "" , id: props.id || "" }
+  const initInputs = { postComment: props.postComment || ""  }
 
   const [postComment, setPostComment] = useState('')
 
@@ -23,8 +23,8 @@ const Posts = (props) => {
     })
   }, [])
 
-   const addComment = (id) => {
-    Axios.post('http://localhost:3001/insert/comment', { postComment: postComment, id: id })
+   const addComment = () => {
+    Axios.post('http://localhost:3001/insert/comment', { postComment: postComment })
   }
 
   const handleChange = (e) => {
