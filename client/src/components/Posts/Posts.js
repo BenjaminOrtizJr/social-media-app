@@ -3,7 +3,7 @@ import './Posts.css'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import SendIcon from '@mui/icons-material/Send';
+import SendIcon from '@mui/icons-material/Send';
 import Axios from 'axios'
 
 const Posts = (props) => {
@@ -23,8 +23,10 @@ const Posts = (props) => {
     })
   }, [])
 
-   const addComment = () => {
-    Axios.post('http://localhost:3001/insert/comment', { postComment: postComment })
+   const addComment = (newComment) => {
+     Axios.post('http://localhost:3001/insert/comment', newComment)
+       .then(res => setPostComment(prevComments => [...prevComments, res.data]))
+        .catch(err => console.log(err))
   }
 
   const handleChange = (e) => {
@@ -73,7 +75,7 @@ const Posts = (props) => {
               placeholder="Comment" />
             
             <span className="send-span">
-              <button className="send-icon" onClick={addComment}>Go</button>
+             <button className="send-icon-button" onClick={addComment}><SendIcon style={{fontSize: 46, color: "#1DA1F2"}}/></button>
             </span>
           </form>
         </>

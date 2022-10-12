@@ -77,18 +77,34 @@ app.get('/read/:id', (req, res, next) => {
 })
 
 // Post Comment
-app.post("/insert/comment", async (req, res, next) => {
+// app.post("/insert/comment", async (req, res, next) => {
+//     const id = req.params._id
+//     const postComment = req.body.postComment
+    
+//     const comment = new CommentModel({ id: id, postComment: postComment });
+
+//     try {
+//         await comment.save()
+//         res.send("inserted comment")
+//     } catch (err) {
+//         console.log(err)
+//     }
+// })
+
+// Post Comment
+app.post("/insert/:id", async (req, res, next) => {
     const id = req.params._id
     const postComment = req.body.postComment
-    
+
     const comment = new CommentModel({ id: id, postComment: postComment });
 
-    try {
-        await comment.save()
-        res.send("inserted comment")
-    } catch (err) {
-        console.log(err)
-    }
+    await comment.save((err, savedComment) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(201).send(savedComment)
+    })
 })
 
 app.listen(3001, () => {

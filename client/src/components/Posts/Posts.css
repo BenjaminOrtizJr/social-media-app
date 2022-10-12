@@ -88,10 +88,9 @@
         padding-left: 5px;
     }
 
-    /* .send-icon {
-        
-        
-    } */
+    .send-icon-button {
+        border: none;
+    }
 
     .comment-icon {
         margin: 5px;
