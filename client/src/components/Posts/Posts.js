@@ -11,31 +11,26 @@ const Posts = (props) => {
   const { postTitle, postImage, postContent } = props
   const [editToggle, setEditToggle] = useState(false)
 
-  const initInputs = { postComment: props.postComment || ""  }
-
-  const [postComment, setPostComment] = useState('')
-
+  const initInputs = { postComment: props.postComment || ""}
   const [inputs, setInputs] = useState(initInputs)
 
-  useEffect(() => {
-    Axios.get('http://localhost:3001/read').then((response) => {
-      setPostComment(response.data)
-    })
-  }, [])
+  const [postComment, setPostComment] = useState('')
+  const [postCommentList, setPostCommentList] = useState([])
 
-   const addComment = (newComment) => {
-     Axios.post('http://localhost:3001/insert/comment', newComment)
-       .then(res => setPostComment(prevComments => [...prevComments, res.data]))
-        .catch(err => console.log(err))
-  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setInputs(prevInputs => ({ ...prevInputs, [name]: value }))
+  // useEffect(() => {
+  //   Axios.get('http://localhost:3001/read').then((response) => {
+  //     setPostComment(response.data)
+  //   })
+  // }, [])
+
+  const addComment = () => {
+    Axios.post('http://localhost:3001/insert/:id', { postComment: postComment, id: props.id })
   }
+   
 
   const handleSubmit = () => {
-      props.submit(inputs, props._id)
+      props.submit(inputs, props.id)
       setInputs(initInputs)
   }
  
@@ -69,9 +64,9 @@ const Posts = (props) => {
             
             <textarea
               className="comment-input"
-              name="postComment"
-              value={inputs.postComment}
-              onChange={handleChange}
+              onChange={(event) => {
+        setPostComment(event.target.value)
+      }}
               placeholder="Comment" />
             
             <span className="send-span">
