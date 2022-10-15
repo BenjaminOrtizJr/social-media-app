@@ -30,7 +30,7 @@ app.post('/insert', async (req, res) => {
     const postTitle = req.body.postTitle
     const postImage = req.body.postImage
     const postContent = req.body.postContent
-    
+
     const post = new PostModel({ postTitle: postTitle, postImage: postImage, postContent: postContent });
     
     try {
@@ -66,46 +66,46 @@ app.delete('/delete/:id', async (req, res) => {
 })
 
 // Get Comments by post id
-app.get('/read/:id', (req, res, next) => {
-    CommentModel.find({ id: req.params._id }, (err, comments) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(comments)
-    })
-})
-
-// Post Comment
-app.post("/insert/:id", async (req, res, next) => {
-    const id = req.body._id
-    const postComment = req.body.postComment
-    
-    const comment = new CommentModel({ id: id, postComment: postComment });
-
-    try {
-        await comment.save()
-        res.send("inserted comment")
-    } catch (err) {
-        console.log(err)
-    }
-})
-
-// Post Comment
-// app.post("/insert/:id", async (req, res, next) => {
-//     const id = req.params._id
-//     const postComment = req.body.postComment
-
-//     const comment = new CommentModel({ id: id, postComment: postComment });
-
-//     await comment.save((err, savedComment) => {
+// app.get('/read/:id', (req, res, next) => {
+//     CommentModel.find({ id: req.params._id }, (err, comments) => {
 //         if(err){
 //             res.status(500)
 //             return next(err)
 //         }
-//         return res.status(201).send(savedComment)
+//         return res.status(200).send(comments)
 //     })
 // })
+
+// // Post Comment
+// app.post("/insert/:id", async (req, res, next) => {
+//     const id = req.body.id
+//     const postComment = req.body.postComment
+    
+//     const comment = new CommentModel({ id: id, postComment: postComment });
+
+//     try {
+//         await comment.save()
+//         res.send("inserted comment")
+//     } catch (err) {
+//         console.log(err)
+//     }
+// })
+
+// Post Comment
+app.post("/insert/:id", async (req, res, next) => {
+    const id = new mongoose.Types.ObjectId()
+    const postComment = req.body.postComment
+
+    const comment = new CommentModel({ id: id, postComment: postComment });
+
+    await comment.save((err, savedComment) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(201).send(savedComment)
+    })
+})
 
 app.listen(3001, () => {
     console.log('Server is running on port 3001...')

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './Posts.css'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SendIcon from '@mui/icons-material/Send';
 import Axios from 'axios'
+import Sound from '../audio/button-1.wav'
 
 const Posts = (props) => {
 
@@ -52,7 +53,8 @@ const Posts = (props) => {
         <>
           <div className="icon-container">
             <ChatBubbleOutlineIcon className="comment-icon" style={{ color: "white", fontSize: 30 }} onClick={() => setEditToggle(prevToggle => !prevToggle)} />
-            <FavoriteBorderIcon className="like-icon" style={{ color: "white", fontSize: 30 }} />
+            <FavoriteBorderIcon className="like-icon" style={{ color: "white", fontSize: 30 }} onClick={() => {}} />
+            
           </div>
         </>
         :
@@ -67,7 +69,9 @@ const Posts = (props) => {
               onChange={(event) => {
         setPostComment(event.target.value)
       }}
-              placeholder="Comment" />
+              placeholder="Comment"
+              required={true}
+            />
             
             <span className="send-span">
              <button className="send-icon-button" onClick={addComment}><SendIcon style={{fontSize: 46, color: "#1DA1F2"}}/></button>
