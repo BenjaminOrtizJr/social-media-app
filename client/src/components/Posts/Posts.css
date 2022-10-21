@@ -64,11 +64,11 @@
     }
 
     .comment-form {
-        padding-left: 6px;
+        padding-left: 4px;
     }
 
     .comment-input {
-        min-width: 80%;
+        min-width: 82%;
         height: 48px;
         outline: none;
         background-color: transparent;
@@ -98,5 +98,14 @@
 
     .like-icon {
         margin: 5px;
+    }
+
+    .comment-wrapper {
+        border: 1px solid rgb(65, 63, 63);
+        border-radius: 5px;
+        width: 98%;
+        background-color: transparent;
+        margin: 10px auto;
+        padding: 10px;
     }
 }

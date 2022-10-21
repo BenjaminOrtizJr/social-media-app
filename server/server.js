@@ -65,8 +65,8 @@ app.delete('/delete/:id', async (req, res) => {
     res.send('deleted')
 })
 
-// Get Comments by post id
-// app.get('/read/:id', (req, res, next) => {
+// // Get Comments by post id
+// app.get('/read/comments', (req, res, next) => {
 //     CommentModel.find({ id: req.params._id }, (err, comments) => {
 //         if(err){
 //             res.status(500)
@@ -76,20 +76,15 @@ app.delete('/delete/:id', async (req, res) => {
 //     })
 // })
 
-// // Post Comment
-// app.post("/insert/:id", async (req, res, next) => {
-//     const id = req.body.id
-//     const postComment = req.body.postComment
-    
-//     const comment = new CommentModel({ id: id, postComment: postComment });
-
-//     try {
-//         await comment.save()
-//         res.send("inserted comment")
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
+// Get Comments
+app.get('/read/comments', async (req, res) => {
+    CommentModel.find({}, (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+        res.send(result)
+    })
+})
 
 // Post Comment
 app.post("/insert/:id", async (req, res, next) => {
